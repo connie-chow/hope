@@ -391,12 +391,14 @@ function refReasonsQuarterly(){
 	
 	var groupArray =  [["Non/late payment of rent"], ["Utility Shut-off, scheduled for (Date):"], ["Housekeeping/home management"],["Lease violation for:"],["Employment/job readiness"],
 						["Education/job training"],["Noticeable change in:"],["Resident-to-resident conflict issues"],["Suspected abuse/domestic violence/exploitation"],["Childcare/afterschool care"],
-						["Transportation"],["Safety"],["Healthcare/medical issues"],
+						["Transportation"],["Safety"],["Healthcare/medical issues"], ["Advocacy"],["Assessments"],["Benefits/Insurance"],["Case Management"],["Child/day care"],["Computer training"], ["Conflict Resolution"], ["Crisis Intervention"], ["Education program (GED, etc.)"], ["Emergency assistance"], ["Family support"], ["Finanicial management/literacy"], ["Financial aid"], ["Healthcare"], ["Home management"], ["Homemaker"], ["Home ownership"], ["Job readiness"], ["Lease intervention"], ["Leagal assistance"], ["Meals"], ["Mental health"], ["Monitoring"], ["Parenting"], ["Prescriptions"], ["School intervention"], ["Substance abuse"], ["Transportation"], ["Veteran services"], ["Vocational training"], ["Youth programs"],
 						["Other:"]];
 	var dataArrayPerf = [["x", "Q1", "Q2", "Q3", "Q4"], ["Non/late payment of rent"], ["Utility Shut-off, scheduled for (Date):"], ["Housekeeping/home management"],["Lease violation for:"],["Employment/job readiness"],
 						["Education/job training"],["Noticeable change in:"],["Resident-to-resident conflict issues"],["Suspected abuse/domestic violence/exploitation"],["Childcare/afterschool care"],
-						["Transportation"],["Safety"],["Healthcare/medical issues"],
+						["Transportation"],["Safety"],["Healthcare/medical issues"], 
+						["Advocacy"],["Assessments"],["Benefits/Insurance"],["Case Management"],["Child/day care"],["Computer training"], ["Conflict Resolution"], ["Crisis Intervention"], ["Education program (GED, etc.)"], ["Emergency assistance"], ["Family support"], ["Finanicial management/literacy"], ["Financial aid"], ["Healthcare"], ["Home management"], ["Homemaker"], ["Home ownership"], ["Job readiness"], ["Lease intervention"], ["Leagal assistance"], ["Meals"], ["Mental health"], ["Monitoring"], ["Parenting"], ["Prescriptions"], ["School intervention"], ["Substance abuse"], ["Transportation"], ["Veteran services"], ["Vocational training"], ["Youth programs"],
 						["Other:"]]; //Q1, Q2,Q3,Q4 values will be filled by logic below
+	//["Advocacy"],["Assessments"],["Benefits/Insurance"],["Case Management"],["Child/day care"],["Computer training"], ["Conflict Resolution"], ["Crisis Intervention"], ["Education program (GED, etc.)"], ["Emergency assistance"], ["Family support"], ["Finanicial management/literacy"], ["Financial aid"], ["Healthcare"], ["Home management"], ["Homemaker"], ["Home ownership"], ["Job readiness"], ["Lease intervention"], ["Leagal assistance"], ["Meals"], ["Mental health"], ["Monitoring"], ["Parenting"], ["Prescriptions"], ["School intervention"], ["Substance abuse"], ["Transportation"], ["Veteran services"], ["Vocational training"], ["Youth programs"],
 	
 			
 	jQuery.ajax({	
@@ -412,6 +414,7 @@ function refReasonsQuarterly(){
 		jQuery(response).each(function(idx,val){
 			jQuery(groupArray).each(function(p,category){		
 				
+				//alert("refReasonQuarterly-" + category);
 				if(val.category == category){
 					//if category matches then only check for each quarter
 					for(j = 1; j < 5; j++){
@@ -428,11 +431,15 @@ function refReasonsQuarterly(){
 						
 		});	
 			
-			if(refReasonChart != null){				
+			if(refReasonChart != null){		
+				alert("loadreasonchart");
 				refReasonChart.load({
 					columns : dataArrayPerf					
 				})
 			}else{		
+				alert("generateCategoryChart");
+				//alert(groupArray);
+				//alert(dataArrayPerf);
 					refReasonChart= generateCategoryChart("#refReasonsChart", "Referral Reason", groupArray, dataArrayPerf);					
 				}			
 		},		

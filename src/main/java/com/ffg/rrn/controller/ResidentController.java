@@ -197,7 +197,39 @@ public class ResidentController extends BaseController {
 
 			if (StringUtils.isEmpty(resident.getReferralReason())) {
 				resident.setReferralReason(
-						"{\"Non/late payment of rent\": \"false\", \"Utility Shut-off, scheduled for (Date):\":\"\", \"Housekeeping/home management\":\"false\", \"Lease violation for:\": \"\", \"Employment/job readiness\":\"false\", \"Education/job training\":\"false\", \"Noticeable change in:\":\"\", \"Resident-to-resident conflict issues\":\"false\", \"Suspected abuse/domestic violence/exploitation\":\"false\", \"Childcare/afterschool care\":\"false\", \"Transportation\":\"false\", \"Safety\":\"false\", \"Healthcare/medical issues\":\"false\", \"Other:\":\"\" }");
+						"{\"Non/late payment of rent\": \"false\", \"Utility Shut-off, scheduled for (Date):\":\"\", \"Housekeeping/home management\":\"false\", \"Lease violation for:\": \"\", \"Employment/job readiness\":\"false\", \"Education/job training\":\"false\", \"Noticeable change in:\":\"\", \"Resident-to-resident conflict issues\":\"false\", \"Suspected abuse/domestic violence/exploitation\":\"false\", \"Childcare/afterschool care\":\"false\", \"Transportation\":\"false\", \"Safety\":\"false\", \"Healthcare/medical issues\":\"false\","
+						+ "\"Advocacy\": \"false\","
+								+ "\"Assessments\": \"false\","
+								+ "\"Benefits/Insurance\": \"false\","
+								+ "\"Case Management\": \"false\","
+								+ "\"Child/day care\": \"false\","
+								+ "\"Computer training\": \"false\","
+								+ "\"Conflict Resolution\": \"false\","
+								+ "\"Crisis intervention\": \"false\","
+								+ "\"Education program (GED, etc.)\": \"false\","
+								+ "\"Emergency assistance\": \"false\","
+								+ "\"Family support\": \"false\","
+								+ "\"Finanicial management/literacy\": \"false\","
+								+ "\"Financial aid\": \"false\","
+								+ "\"Healthcare\": \"false\","
+								+ "\"Home management\": \"false\","
+								+ "\"Homemaker\": \"false\","
+								+ "\"Home ownership\": \"false\","
+								+ "\"Job readiness\": \"false\","
+								+ "\"Lease intervention\": \"false\","
+								+ "\"Leagal assistance\": \"false\","
+								+ "\"Meals\": \"false\","
+								+ "\"Mental health\": \"false\","
+								+ "\"Monitoring\": \"false\","
+								+ "\"Parenting\": \"false\","
+								+ "\"Prescriptions\": \"false\","
+								+ "\"School intervention\": \"false\","
+								+ "\"Substance abuse\": \"false\","
+								+ "\"Transportion\": \"false\","
+								+ "\"Veteran services\": \"false\","
+								+ "\"Vocational training\": \"false\","
+								+ "\"Youth programs\": \"false\","
+							    + "\"Other:\":\"\" }");
 			}
 			if (StringUtils.isEmpty(resident.getSelfSufficiency())) {
 				resident.setSelfSufficiency(
