@@ -195,6 +195,8 @@ public class Resident {
 	private String planOfAction;
 	// This contains JSON String for each Domain
 	private String anticipatedOutcome;
+	
+	private String anticipatedOutcomeDetails; // senior health issue + eviction amount field
 	@JsonView
 	private List<String> anticipatedOutcomesList;
 	// --this variable is used in referral form as well.
@@ -208,7 +210,7 @@ public class Resident {
 	private String achievedGoals;
 	private Date actionPlanDateAdded;
 	private Date actionPlanDateModified;
-
+    
 	// ActionPlan Fields -End
 	
 	// Case Notes Fields - Begin

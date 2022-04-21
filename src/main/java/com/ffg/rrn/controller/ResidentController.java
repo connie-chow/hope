@@ -256,7 +256,8 @@ public class ResidentController extends BaseController {
 			resident.setOutcomesAchieved(null);
 			resident.setCompletionDates(null);
 			resident.setAchievedGoals(null);
-
+			resident.setAnticipatedOutcomeDetails(null); // new with input field _evictionAmount
+			
 		}
 
 		// Grants will never be null - either "All" or some Property
@@ -329,8 +330,11 @@ public class ResidentController extends BaseController {
 		}
 
 		resident.setAnticipatedOutcomesList(anticipatedOutcomes);
-
-			resident.setRefPartners(residentService.getAllReferralPartners());
+		
+		// new _evictionAmount and _seniorHealthIssue input fields to be populated
+		String anticipatedOutcomeDetails = resident.getAnticipatedOutcomeDetails();
+		
+		resident.setRefPartners(residentService.getAllReferralPartners());
 
 		model.addAttribute("resident", resident);
 		model.addAttribute("message", "Please select resident from All Resident Table first");

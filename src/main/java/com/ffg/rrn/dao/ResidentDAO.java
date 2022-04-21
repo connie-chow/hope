@@ -293,7 +293,7 @@ public class ResidentDAO extends JdbcDaoSupport {
 			resident = this.getJdbcTemplate().queryForObject(
 					ResidentMapper.RESIDENT_SQL + " where r.resident_id = ? " + dateSuffix + " LIMIT 1",
 					new Object[] { residentId }, rowMapper);
-
+			
 			WizardStepCounter wsCounter = new WizardStepCounter();
 
 			if (!StringUtils.isEmpty(resident.getFirstName()) && !StringUtils.isEmpty(resident.getLastName())

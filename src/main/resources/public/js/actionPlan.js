@@ -102,6 +102,7 @@ jQuery(document).ready(function() {
 	cache : false,
 	timeout : 600000,
 	success : function(data) {
+		
 	    // Following method highlight background in actionPlan SSM Grid as
 	    // per Current Score of resident.
 	    highlightSSMGridAsPerCurrentScore(data);
@@ -140,7 +141,6 @@ function buildAchorTagForSelectedDate(that, residentId){
  * This method helps in populates action plan fields for existing saved actionPlan. Get Values from database and put it in each Box
  */
 function populateEachActionPlanFromJsonData() {
- 
 
     if (jQuery("#_planOfActionString").val() != '') {
 	var planOfActionJson = JSON.parse(jQuery("#_planOfActionString").val());
@@ -240,6 +240,24 @@ function populateEachActionPlanFromJsonData() {
 	
     }
     
+    
+    if (jQuery("#_anticipatedOutcomesAchievedDetailsString").val() != '') {
+    	var anticipatedOutcomeDetailsJson = JSON.parse(jQuery("#_anticipatedOutcomesAchievedDetailsString").val());
+    	
+    	if (anticipatedOutcomeDetailsJson["HOUSING"] != '') {
+    		document.getElementById("_evictionAmount").style = "visibility:visible";
+    		document.getElementById('_evictionAmount').value = anticipatedOutcomeDetailsJson["HOUSING"];
+    	}
+    	
+    	if (anticipatedOutcomeDetailsJson["DISABILITY AND PHYSICAL HEALTH"] != '') {
+    		document.getElementById("_seniorHealthIssue").style = "visibility:visible";
+    		jQuery("#_seniorHealthIssue").val(anticipatedOutcomeDetailsJson["DISABILITY AND PHYSICAL HEALTH"]);  
+    	}
+    	
+    }
+    	
+    
+ 
     if (jQuery("#_anticipatedDateString").val() != '') {
 	var completionDateJson = JSON.parse(jQuery("#_anticipatedDateString").val());
 
@@ -439,6 +457,10 @@ function buildEachJSONString() {
     + '"EMPLOYMENT":"' + jQuery("#_inputDateTextEmp").val().trim() + '",' + '"EDUCATION":"' + jQuery("#_inputDateTextEdu").val().trim() + '",' + '"NETWORK SUPPORT":"'
     + jQuery("#_inputDateTextNS").val().trim() + '",' + '"HOUSEHOLD MANAGEMENT":"' + jQuery("#_inputDateTextHH").val().trim() + '",'+ '"DISABILITY AND PHYSICAL HEALTH":"' + jQuery("#_inputDateTextDH").val().trim() + '"}';
 
+    var anticipatedOutcomesDetailsString = '{"HOUSING":"' + jQuery("#_evictionAmount").val().trim() + '",' + '"MONEY MANAGEMENT":"",' + '"EMPLOYMENT":"",' + '"EDUCATION":"",' + '"NETWORK SUPPORT":"",'
+    + '"HOUSEHOLD MANAGEMENT":"",' + '"DISABILITY AND PHYSICAL HEALTH":"' + jQuery("#_seniorHealthIssue").val().trim() + '"}';
+    jQuery("#_anticipatedOutcomesAchievedDetailsString").val(anticipatedOutcomesDetailsString);
+    
     // These are all setting into hidden variables before saving Object   
     jQuery("#_completionDateString").val(completionDateString);
 

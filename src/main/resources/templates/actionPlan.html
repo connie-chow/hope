@@ -410,7 +410,8 @@ body {
 									</select>		
 								</td>
 								<td><select class="form-control input-sm setable"
-									id="_aoHousing">
+									id="_aoHousing"
+									onChange="checkEvictionSelected();">
 										<option value="">Select</option>
 										<option value="Rectify lease violation">Rectify lease violation</option>
 										<option value="Remain housed overtime">Remain housed overtime</option>
@@ -418,7 +419,11 @@ body {
 										<option value="Avoid utility-shut off">Avoid utility-shut off</option>
 										<option value="Purchase a home">Purchase a home</option>
 										<option value="Other">Other</option>
-								</select></td>
+								</select>
+								<textarea class="form-control input-sm" rows="1"
+										id="_evictionAmount" style="resize: none;visibility:hidden; display:none;"
+										onkeyup="validateInput(this)" draggable="false"></textarea>
+								</td>
 								<td><input class="form-control input-sm" type="text"
 									id="_inputDateTextAnticipatedHousing" maxlength="10" value=""
 									placeholder="MM/DD/YYYY" /></td>
@@ -803,7 +808,8 @@ body {
 											th:utext="${refPartner}" />
 									</select></td>
 								<td><select class="form-control input-sm setable"
-									id="_aoDH">
+									id="_aoDH"
+									onChange="seniorHealthIssue();">
 										<option value="">Select</option>
 										<option value="Reduce use of hospital ER">Reduce use of hospital ER</option>
 										<option value="Identify a place to receive routine primary care services">Identify a place to receive routine primary care services</option>
@@ -811,10 +817,13 @@ body {
 										<option value="Enroll in or change health insurance">Enroll in or change health insurance</option>
 										<option value="Reduce food insecurity">Reduce food insecurity</option>
 										<option value="Improve ability to manage health/mental health condition">Improve ability to manage health/mental health condition</option>
+										<option value="Health issues for seniors">Health issues for seniors</option>
 										<option value="Other">Other</option>
-										
-										
-								</select></td>
+								</select>
+								<textarea class="form-control input-sm" rows="1"
+										id="_seniorHealthIssue" style="resize: none;visibility:hidden;display:none;'"
+										onkeyup="validateInput(this)" draggable="false"></textarea>
+								</td>
 								
 								<td><input class="form-control input-sm" type="text"
 									id="_inputDateTextAnticipatedDH" maxlength="10" value=""
@@ -1093,7 +1102,10 @@ body {
 							th:value="*{completionDates}" /> <input type="hidden"
 							th:field="*{isResident}" /> <input type="hidden" id="_rr"
 							th:field="*{referralReason}" />
-
+							<input type="hidden"
+							id="_anticipatedOutcomesAchievedDetailsString" th:field="*{anticipatedOutcomeDetails}"
+							th:value="*{anticipatedOutcomeDetails}" /> 
+							
 						<div class="text-danger">
 							<span
 								th:text="${resident.mostRecentSSMDate=='--'}?'Please complete Self Sufficiency Matrix first.':''"></span>
@@ -1130,6 +1142,25 @@ body {
 	<script
 		src="https://getbootstrap.com/docs/3.3/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script src="/js/menu.js"></script>
+	<script type="text/javascript">
+	function checkEvictionSelected() {
+		 var value = document.getElementById("_aoHousing").value;
+		 if (value == 'Avoid moving out becuase of non-payment of rent') {
+			 document.getElementById("_evictionAmount").style = "visibility:visible";
+		 } else {
+			 document.getElementById("_evictionAmount").style = "visibility:hidden; display:none;";
+		 }
+	}
+		 
+	function seniorHealthIssue() {
+		var value = document.getElementById("_aoDH").value;
+		if (value == 'Health issues for seniors') {
+			document.getElementById("_seniorHealthIssue").style = "visibility:visible";
+		} else {
+			document.getElementById("_seniorHealthIssue").style = "visibility:hidden; display:none;";
+		}
+}
+</script>
 
 </body>
 </html>

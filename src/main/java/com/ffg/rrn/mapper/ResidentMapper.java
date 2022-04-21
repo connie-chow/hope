@@ -25,7 +25,7 @@ public class ResidentMapper implements RowMapper<Resident> {
 					+ " r.AGE, r.GENDER, r.PRI_LANGUAGE, r.MARITAL_STATUS,  r.ANNUAL_GROSS, r.ETHNICITY, r.RACE, r.H_O_H, r.VETERAN, r.DISABILITY, r.RC_OR_EX_OFF, r.SSI, r.SSDI, "
 					+ " r.HEALTH_COVERAGE, r.HIGHEST_EDU, r.SAFE_DAY, r.SAFE_NIGHT, OCCUPANCY_LENGTH, MODE_TRANSPORT, EXP_FOOD_SHORT, INTERNET_ACCESS, HOH_TYPE, INT_RES_COUNCIL, UNEMP_REASON, BARRIER_TO_EDU, HEALTH_CONDITION, PROGRAM_SRVC_YOUTH, PROGRAM_SRVC_ADULT,   "
 					+ " (select string_agg(full_name || ' (' || PVR_FLAG || ')', ', ') from child where parent_id = r.resident_id) as children, "
-					+ " ap.referral_partner , ap.anticipated_date , ap.plan_of_action, ap.plan_details, ap.anticipated_outcomes,  ap.followup_notes, ap.outcome_achieved, ap.achieved_ssm, ap.completion_date, ap.date_added as apDateAdded, ap.date_modified as apDateModified, "
+					+ " ap.referral_partner , ap.anticipated_date , ap.plan_of_action, ap.plan_details, ap.anticipated_outcomes,  ap.followup_notes, ap.outcome_achieved, ap.anticipated_outcomes_details, ap.achieved_ssm, ap.completion_date, ap.date_added as apDateAdded, ap.date_modified as apDateModified, "
 					+ " cn.description, cn.assessment, cn.plan, cn.no_show_date, cn.date_added as cnDateAdded, cn.date_modified as cnDateModified,"
 					+ " rf.INTERPRETATION, rf.REFERRED_BY, rf.REFERRAL_REASON, rf.COMMENTS, rf.PREVIOUS_ATTEMPTS, rf.RF_FOLLOWUP_NOTES, rf.RES_APP_SCHEDULED, rf.date_added as rfDateAdded, rf.date_modified as rfDateModified"
 					+ " from Resident r join referral ref on ref.ref_id = r.ref_type"
@@ -103,6 +103,7 @@ public class ResidentMapper implements RowMapper<Resident> {
 		r.setAnticipatedDates(rs.getString("anticipated_date"));
 		r.setPlanOfAction(rs.getString("PLAN_OF_ACTION"));
 		r.setAnticipatedOutcome(rs.getString("ANTICIPATED_OUTCOMES"));
+		r.setAnticipatedOutcomeDetails(rs.getString("ANTICIPATED_OUTCOMES_DETAILS")); // new evictionAmount seniorHealthIssue input fields
 		r.setOutcomesAchieved(rs.getString("OUTCOME_ACHIEVED"));
 		r.setCompletionDates(rs.getString("COMPLETION_DATE"));
 		r.setAchievedGoals(rs.getString("ACHIEVED_SSM"));
