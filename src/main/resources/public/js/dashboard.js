@@ -1896,6 +1896,7 @@ function psyPercentage(){
 	var selectedProps = JSON.stringify(selectedProperties);
 	dataArray = null;
 
+	
 	jQuery.ajax({
 		type : "POST",
 		contentType : "application/json",
@@ -1940,7 +1941,7 @@ function psaPercentage(){
 
 	var selectedProps = JSON.stringify(selectedProperties);
 	dataArray = null;
-
+	
 	jQuery.ajax({
 		type : "POST",
 		contentType : "application/json",

@@ -295,6 +295,10 @@ public class Resident {
 	private String healthCondition;
 	private String programSrvcYouth;
 	private String programSrvcAdult;
+	private String programSrvcYouth2;
+	private String programSrvcAdult2;
+	private String programSrvcYouth3;
+	private String programSrvcAdult3;
 	
 	
 	public String getFullName() {

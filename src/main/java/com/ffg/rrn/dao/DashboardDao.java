@@ -2296,21 +2296,21 @@ public class DashboardDao extends JdbcDaoSupport {
 		selectedProperties = selectedProperties.replace("]", "");
 
 		List<CategoryPercentage> cpList = new ArrayList<CategoryPercentage>();
-		String SQL_ = "select 'College preparation' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'College preparation' "
+		String SQL_ = "select 'College preparation' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'College preparation' or PROGRAM_SRVC_ADULT2 = 'College preparation' or PROGRAM_SRVC_ADULT3 = 'College preparation')"
 				+ " union "
-				+ " select 'Counselling' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'Counselling'"
+				+ " select 'Counselling' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'Counselling' or PROGRAM_SRVC_ADULT2 = 'Counselling' or PROGRAM_SRVC_ADULT3 = 'Counselling')"
 				+ " union "
-				+ " select 'Emergency assist' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'Emergency assist'"
+				+ " select 'Emergency assist' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'Emergency assist' or PROGRAM_SRVC_ADULT2 = 'Emergency assist' or PROGRAM_SRVC_ADULT3 = 'Emergency assist')"
 				+ " union "
-				+ " select 'GED/ESL' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'GED/ESL'"
+				+ " select 'GED/ESL' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'GED/ESL' or PROGRAM_SRVC_ADULT2 = 'GED/ESL' or PROGRAM_SRVC_ADULT3 = 'GED/ESL')"
 				+ " union "
-				+ " select 'Home ownership education' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'Home ownership education'"
+				+ " select 'Home ownership education' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'Home ownership education' or PROGRAM_SRVC_ADULT2 = 'Home ownership education' or PROGRAM_SRVC_ADULT3 = 'Home ownership education')"
 				+ " union "
-				+ " select 'Jobs' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'Jobs'"
+				+ " select 'Jobs' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'Jobs' or PROGRAM_SRVC_ADULT2 = 'Jobs' or PROGRAM_SRVC_ADULT3 = 'Jobs')"
 				+ " union "
-				+ " select 'Small business dev' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'Small business dev'"
+				+ " select 'Small business dev' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'Small business dev' or PROGRAM_SRVC_ADULT2 = 'Small business dev' or PROGRAM_SRVC_ADULT3 = 'Small business dev')"
 				+ " union "
-				+ " select 'Vocational education' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_ADULT = 'Vocational education'";
+				+ " select 'Vocational education' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_ADULT = 'Vocational education' or PROGRAM_SRVC_ADULT2 = 'Vocational education' or PROGRAM_SRVC_ADULT3 = 'Vocational education')";
 
 		if (StringUtils.isNotBlank(selectedProperties)) {
 			SQL_ = SQL_.replace(":properties", selectedProperties);
@@ -2482,29 +2482,29 @@ public class DashboardDao extends JdbcDaoSupport {
 		selectedProperties = selectedProperties.replace("]", "");
 
 		List<CategoryPercentage> cpList = new ArrayList<CategoryPercentage>();
-		String SQL_ = "select 'Arts and Crafts' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Arts and crafts' "
+		String SQL_ = "select 'Arts and Crafts' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Arts and crafts' or PROGRAM_SRVC_YOUTH2 = 'Arts and crafts' or PROGRAM_SRVC_YOUTH3 = 'Arts and crafts')"
 				+ " union "
-				+ " select 'After school program' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'After school program'"
+				+ " select 'After school program' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'After school program' or PROGRAM_SRVC_YOUTH2 = 'After school program' or PROGRAM_SRVC_YOUTH3 = 'After school program')"
 				+ " union "
-				+ " select 'Computer education' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Computer education'"
+				+ " select 'Computer education' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Computer education' or PROGRAM_SRVC_YOUTH2 = 'Computer education' or PROGRAM_SRVC_YOUTH3 = 'Computer education')"
 				+ " union "
-				+ " select 'Delinquency prevention' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Delinquency prevention'"
+				+ " select 'Delinquency prevention' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Delinquency prevention' or PROGRAM_SRVC_YOUTH2 = 'Delinquency prevention' or PROGRAM_SRVC_YOUTH3 = 'Delinquency prevention')"
 				+ " union "
-				+ " select 'Drug prevention' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Drug prevention'"
+				+ " select 'Drug prevention' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Drug prevention' or PROGRAM_SRVC_YOUTH2 = 'Drug prevention' or PROGRAM_SRVC_YOUTH3 = 'Drug prevention')"
 				+ " union "
-				+ " select 'Field trips' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Field trips'"
+				+ " select 'Field trips' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Field trips' or PROGRAM_SRVC_YOUTH2 = 'Field trips' or PROGRAM_SRVC_YOUTH3 = 'Field trips')"
 				+ " union "
-				+ " select 'GED/ESL' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'GED/ESL'"
+				+ " select 'GED/ESL' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'GED/ESL' or PROGRAM_SRVC_YOUTH2 = 'GED/ESL' or PROGRAM_SRVC_YOUTH3 = 'GED/ESL')"
 				+ " union "
-				+ " select 'Jobs' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Jobs'"
+				+ " select 'Jobs' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Jobs' or PROGRAM_SRVC_YOUTH2 = 'Jobs' or PROGRAM_SRVC_YOUTH3 = 'Jobs')"
 				+ " union "
-				+ " select 'Mentoring' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Mentoring'"
+				+ " select 'Mentoring' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Mentoring' or PROGRAM_SRVC_YOUTH2 = 'Mentoring' or PROGRAM_SRVC_YOUTH3 = 'Mentoring')"
 				+ " union "
-				+ " select 'Music' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Music'"
+				+ " select 'Music' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Music' or PROGRAM_SRVC_YOUTH2 = 'Music' or PROGRAM_SRVC_YOUTH3 = 'Music')"
 				+ " union "
-				+ " select 'Sports' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Sports'"
+				+ " select 'Sports' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Sports' or PROGRAM_SRVC_YOUTH2 = 'Sports' or PROGRAM_SRVC_YOUTH3 = 'Sports')"
 				+ " union "
-				+ " select 'Tutoring' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and PROGRAM_SRVC_YOUTH = 'Tutoring'";
+				+ " select 'Tutoring' as category, ROUND((count(*) / (select case when count(*) > 0 then count(*) else 1 END from resident where prop_id  in (:properties))::float)* 100) as percentage from resident where  prop_id in (:properties) and (PROGRAM_SRVC_YOUTH = 'Tutoring' or PROGRAM_SRVC_YOUTH2 = 'Tutoring' or PROGRAM_SRVC_YOUTH3 = 'Tutoring')";
 
 		if (StringUtils.isNotBlank(selectedProperties)) {
 			SQL_ = SQL_.replace(":properties", selectedProperties);

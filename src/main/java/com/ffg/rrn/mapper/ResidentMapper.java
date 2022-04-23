@@ -23,7 +23,7 @@ public class ResidentMapper implements RowMapper<Resident> {
 					+ " r.ALLOW_CONTACT, r.WANTS_SURVEY, r.PHOTO_RELEASE, r.SERVICE_COORD, r.REF_TYPE, r.A_TYPE, "
 					+ " r.date_added, r.date_modified, r.modified_by, p.prop_name, ref.ref_value, a.a_value, "
 					+ " r.AGE, r.GENDER, r.PRI_LANGUAGE, r.MARITAL_STATUS,  r.ANNUAL_GROSS, r.ETHNICITY, r.RACE, r.H_O_H, r.VETERAN, r.DISABILITY, r.RC_OR_EX_OFF, r.SSI, r.SSDI, "
-					+ " r.HEALTH_COVERAGE, r.HIGHEST_EDU, r.SAFE_DAY, r.SAFE_NIGHT, OCCUPANCY_LENGTH, MODE_TRANSPORT, EXP_FOOD_SHORT, INTERNET_ACCESS, HOH_TYPE, INT_RES_COUNCIL, UNEMP_REASON, BARRIER_TO_EDU, HEALTH_CONDITION, PROGRAM_SRVC_YOUTH, PROGRAM_SRVC_ADULT,   "
+					+ " r.HEALTH_COVERAGE, r.HIGHEST_EDU, r.SAFE_DAY, r.SAFE_NIGHT, OCCUPANCY_LENGTH, MODE_TRANSPORT, EXP_FOOD_SHORT, INTERNET_ACCESS, HOH_TYPE, INT_RES_COUNCIL, UNEMP_REASON, BARRIER_TO_EDU, HEALTH_CONDITION, PROGRAM_SRVC_YOUTH, PROGRAM_SRVC_ADULT, PROGRAM_SRVC_YOUTH2, PROGRAM_SRVC_ADULT2, PROGRAM_SRVC_YOUTH3, PROGRAM_SRVC_ADULT3, "
 					+ " (select string_agg(full_name || ' (' || PVR_FLAG || ')', ', ') from child where parent_id = r.resident_id) as children, "
 					+ " ap.referral_partner , ap.anticipated_date , ap.plan_of_action, ap.plan_details, ap.anticipated_outcomes,  ap.followup_notes, ap.outcome_achieved, ap.achieved_ssm, ap.completion_date, ap.date_added as apDateAdded, ap.date_modified as apDateModified, "
 					+ " cn.description, cn.assessment, cn.plan, cn.no_show_date, cn.date_added as cnDateAdded, cn.date_modified as cnDateModified,"
@@ -96,6 +96,10 @@ public class ResidentMapper implements RowMapper<Resident> {
 		r.setHealthCondition(rs.getString("HEALTH_CONDITION"));
 		r.setProgramSrvcYouth(rs.getString("PROGRAM_SRVC_YOUTH"));
 		r.setProgramSrvcAdult(rs.getString("PROGRAM_SRVC_ADULT"));
+		r.setProgramSrvcYouth2(rs.getString("PROGRAM_SRVC_YOUTH2"));
+		r.setProgramSrvcAdult2(rs.getString("PROGRAM_SRVC_ADULT2"));
+		r.setProgramSrvcYouth3(rs.getString("PROGRAM_SRVC_YOUTH3"));
+		r.setProgramSrvcAdult3(rs.getString("PROGRAM_SRVC_ADULT3"));
 				
 
 		// ActionPlan
