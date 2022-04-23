@@ -34,8 +34,9 @@ jQuery(document).ready(function() {
 
 function populateReferralReasonsWithValues() {
 
-   referralReasons = JSON.parse(jQuery("#_referralReason").val());   
-    var row = '';    
+   referralReasons = JSON.parse(jQuery("#_referralReason").val());  
+  
+   var row = '';    
     var inputBox = '';
     var chkBox = '';
 

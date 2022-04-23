@@ -129,7 +129,7 @@ public class ResidentMapper implements RowMapper<Resident> {
 		r.setResidentAppointmentScheduled(rs.getString("RES_APP_SCHEDULED"));
 		r.setReferralFormDateAdded(rs.getDate("rfDateAdded"));
 		r.setReferralFormDateModified(rs.getDate("rfDateModified"));
-
+//System.out.println("ResidentMapper.mapRow() - " + r.toString());
 		return r;
 
 	}

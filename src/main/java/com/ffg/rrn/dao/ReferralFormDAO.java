@@ -70,6 +70,7 @@ public class ReferralFormDAO extends JdbcDaoSupport {
 		}
 
 		long referralFormId = keyHolder.getKey().longValue();
+		
 		return referralFormId;
 
 	}
@@ -87,21 +88,41 @@ public class ReferralFormDAO extends JdbcDaoSupport {
 		ps.setString(6, resident.getRfFollowUpNotes().trim());
 		ps.setString(7, resident.getResidentAppointmentScheduled());
 		ps.setLong(8, resident.getResidentId());
+		
 		return ps;
 	}
 
 	private PreparedStatement buildInsertReferralForm(Connection connection, @Valid Resident resident, String[] pkColumnNames) throws SQLException {
-
+       
 		PreparedStatement ps = connection.prepareStatement(SQL_INSERT_REFERRAL_FORM, pkColumnNames);
 		ps.setLong(1, resident.getResidentId());
 		ps.setBoolean(2, resident.isInterpretation());
 		ps.setString(3, resident.getReferredBy());
 		ps.setString(4, resident.getReferralReason());
-		ps.setString(5, resident.getCommentsOrExplanation().trim());
-		ps.setString(6, resident.getPreviousAttempts().trim());
-		ps.setString(7, resident.getRfFollowUpNotes().trim());
+		
+		try {
+			ps.setString(5, resident.getCommentsOrExplanation().trim());
+		} catch(Exception e) {
+			ps.setString(5, "");
+		}
+		
+		
+		try {
+			ps.setString(6, resident.getPreviousAttempts().trim());
+		} catch(Exception e) {
+			ps.setString(6, "");
+		}
+		
+		
+		try {
+			ps.setString(7, resident.getRfFollowUpNotes().trim());
+		} catch(Exception e) {
+			ps.setString(7, "");
+		}
+		
+		
 		ps.setString(8, resident.getResidentAppointmentScheduled());
-		ps.setString(9, resident.getServiceCoord());
+		ps.setString(9, resident.getResidentAppointmentScheduled());
 		
 		return ps;
 	}

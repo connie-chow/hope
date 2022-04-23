@@ -406,18 +406,54 @@ public class ResidentController extends BaseController {
 		return "allResident";
 	}
 
+	
+	
+	// New Referral Reason DDLB on onboarding.html - Overloaded Method
 	@PostMapping("/saveResident")
-	public String saveOrUpdate(@Valid @ModelAttribute Resident resident, BindingResult bindingResult) throws Exception {
+	public String saveOrUpdate(@RequestParam(value ="referralReason", required=false) String referralReason, @Valid @ModelAttribute Resident resident, BindingResult bindingResult) throws Exception {
 
 		// This will be new ResidentId always
 		// by default this new resident is active
 		resident.setActive(true);
 		resident.setModifiedBy(getSessionUsername());
 		resident.setServiceCoord(getSessionUsername());
-		residentService.saveResident(resident);
-
+		long resident_id = residentService.saveResident(resident);
+		
+		
+		// New Referral Reason DDLB in onboarding.html page
+		if (referralReason != null && !referralReason.isEmpty()) {
+			Resident r = residentService.getResidentById(resident_id, getSessionUsername(), "", "");
+			String json_refReason = "{\"" + referralReason + "\":" + "\"true\"}";
+		
+			String[] referralReasonList = {"Non/late payment of rent", "Utility Shut-off, scheduled for (Date):",
+				"Housekeeping/home management", "Lease violation for:", "Employment/job readiness", "Education/job training", "Noticeable change in:",
+				"Resident-to-resident conflict issues", "Suspected abuse/domestic violence/exploitation", "Childcare/afterschool care", "Transportation", "Safety", "Healthcare/medical issues", "Other"};
+		
+			String json = "{";
+		
+			for(int i = 0; i< referralReasonList.length;i++) {
+				String item = referralReasonList[i];
+				if(referralReason.equals(item)) {
+					json = json + "\"" + item + "\":\"true\",";
+				} else {
+					json = json + "\"" + item + "\":\"false\",";
+				}
+			}
+		
+			if(json.endsWith(","))
+			{
+				json = json.substring(0,json.length() - 1) + '}';
+			}
+		
+		
+			r.setReferralReason(json);
+			r.setResidentAppointmentScheduled("{\"Resident Appointment Scheduled?\":\"\"}");
+			r.setServiceCoord("{\"Resident Appointment Scheduled?\":\"\"}");
+			residentService.saveReferralForm(r);
+		}
 		return "redirect:/onboarding?residentId=" + resident.getResidentId();
 	}
+	
 
 	@PostMapping("/deactivateResident")
 	public String deactivateResident(@Valid @ModelAttribute Resident resident, BindingResult bindingResult) {

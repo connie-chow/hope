@@ -429,6 +429,26 @@ public class ResidentDAO extends JdbcDaoSupport {
 
 		return residentId;
 	}
+	
+	
+	/**
+	 * New Referral Reason DDLB on onboarding.html - Overloaded Method
+	 * @param resident
+	 */
+	public Long saveResident(Resident resident, String referralReason) {
+
+		Long residentId = resident.getResidentId();
+
+		// Logic on when to insert vs update existing Resident
+		if (residentId == null || residentId == 0) {
+			residentId = insertNewResident(resident);
+		} else {
+			residentId = updateExistingResident(resident);
+		}
+
+		return residentId;
+	}
+
 
 	public void updateResidentStatus(Resident resident) {
 		this.getJdbcTemplate().update(conn -> buildChangeStatusOfResidentPS(conn, resident));
@@ -484,13 +504,16 @@ public class ResidentDAO extends JdbcDaoSupport {
 
 	private PreparedStatement buildInsertResidentPS(Connection connection, Resident resident, String[] pkColumnNames)
 			throws SQLException {
+		
 		PreparedStatement ps = connection.prepareStatement(SQL_INSERT_RESIDENT, pkColumnNames);
+		
 		ps.setString(1, StringUtils.capitalize(resident.getFirstName().trim().toLowerCase()));
 		ps.setString(2, StringUtils.capitalize(resident.getMiddle().trim().toLowerCase()));
 		ps.setString(3, StringUtils.capitalize(resident.getLastName().trim().toLowerCase()));
 		ps.setInt(4, resident.getPropertyId());
 		ps.setString(5, StringUtils.capitalize(resident.getAddress().trim().toLowerCase()));
 		ps.setInt(6, resident.getRefId());
+		//ps.setString(7,  resident.getReferralReason()); // new referral reason ddlb onboarding.html
 		ps.setBoolean(7, resident.getIsResident());
 		ps.setString(8, resident.getText());
 		ps.setString(9, resident.getServiceCoord());
