@@ -509,6 +509,23 @@ public class ResidentController extends BaseController {
 
 		return "redirect:/onboarding?residentId=" + resident.getResidentId();
 	}
+	
+	/*
+	// new Events page
+	@RequestMapping(value = "/events", method = RequestMethod.GET)
+	public String goToEvents(Model model, Principal principal) throws Exception {
+
+		// (1) (en)
+				// After user login successfully.
+System.out.println("model = " + model.toString());
+				if (principal != null) {
+					populateSCinModel(model, principal);
+				}
+
+				return "events";
+	}
+	*/
+	
 
 	private List<ResidentAssessmentQuestionnaire> getResidentAssessmentQuestionnaires(Resident resident) {
 		List<ResidentAssessmentQuestionnaire> raqs = new ArrayList<>();

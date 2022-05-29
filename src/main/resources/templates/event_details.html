@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Resident Resource Network</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="/css/common.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.navbar-brand>img {
+	height: 100%;
+}
+
+.navbar-brand {
+	padding: 0;
+}
+</style>
+
+<script type="text/javascript">
+	var res = null;
+</script>
+
+</head>
+<body>
+
+	<!-- Include _menu.html -->
+	<th:block th:include="../templates/_menu"></th:block>
+
+	<div class="container">
+	
+		<div id="eventDetails">
+		
+			<table>
+				<tr> 
+					<a href="/updateEvent">Edit Event</a>
+				</tr>
+				<tr>
+				    <td th:text="${event.eventId}"/>
+					<td th:text="${event.name}"/>
+				 	<td th:text="${event.dateAdded}"/>
+					<td th:text="${event.description}"/>
+				 	<td th:text="${event.attendees}"/>
+				</tr>
+			</table>
+			 
+		</div>
+		
+		
+		<!--  form -->
+			<form name='_eventsF' th:action="@{/updateEvent}"
+				th:object="${event}" method='POST' class="form-horizontal">
+					<input type="hidden" th:field="*{eventId}" />
+					
+					<input type="hidden" id="_checkboxList" th:field="*{residentList}" />
+				<p>Event Name:<input class="form-control input-sm" id="eventName"
+										th:field="*{name}" th:text="${name}" placeholder="Enter Event Name"
+										required>
+					
+<p>Event Date:<input class="form-control input-sm" id="_eventDate"  th:field="*{dateAdded}" type="text" maxlength="18" value="" placeholder="MM/DD/YYYY hh:mm" />
+									
+									
+				<!-- 	<input class="form-control" placeholder="MM/DD/YYYY (/ comes automatically, just type numbers)" id="_eventDate" th:field="*{dateAdded}" /></td>
+					-->	
+					<div class="panel-heading">Description:</div>
+						<div class="panel-body">
+							<textarea class="form-control" rows="5" id="_eventDesc"
+								th:field="*{description}" th:value="*{description}"></textarea>
+						</div>
+					</div>
+					<!-- 
+					<div class="col-sm-11 borderleft">
+						<div th:each="r: *{residents}">
+							<div class="col-md-3">
+								<label> <input type="checkbox" th:id="${r.residentId}"
+									th:name="'_resId_'+${r.residentId}+'_Name_'+${r.firstName}+'_LastName_'+${r.lastName}">&nbsp;<span
+									th:text="${r.propertyName}"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+				
+				
+					<div class="col-sm-10">
+						<select class="form-control input-sm" id="_attendees">
+					 th:field="*{}" required 
+										<option value="">Select</option>
+										<option th:each="resident : ${allResidents}"
+											th:value="${resident.residentId}" th:utext="${resident.first_name}" />
+											
+						</select>
+						
+						
+						<select class="form-control  input-sm" id="_attendees">
+										<option value="">Select</option>
+										<option th:each="resident : ${allResidents}"
+											th:value="${resident.residentId}"
+											th:utext="${resident.firstName}" />
+									</select>
+									-->
+					</div>
+					
+					
+					<div class="col-sm-11 borderleft">
+					<div th:each="resident: *{allResidents}">
+						<div class="col-md-3">
+						<!-- <label> <input type="checkbox" th:id="${resident.residentId}"
+							th:checked="*{residentId}"
+								name="list">&nbsp;
+								<span th:text="${resident.firstName} + ' ' + ${resident.lastName}"></span>
+							</label>-->
+						
+							<label> <input type="checkbox" th:id="${resident.residentId}" class="list"
+							th:checked="*{residentId}"
+								th:name="${resident.residentId}">&nbsp;
+								<span th:text="${resident.firstName} + ' ' + ${resident.lastName}"></span>
+							</label>
+							
+							
+							
+							
+							
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+					<!-- Submit  -->
+				 <input type="submit" id="_eventSubmit" onclick=""
+							class="btn btn-primary btn-lg" value="Save Event">
+				<!--  	<input type="submit" id="_eventSubmit" onclick="alert('1'); alert(document.getElementsByClassName('list')[0].checked);alert(json);alert(document.getElementById('_checkboxList').value);"
+							class="btn btn-primary btn-lg" value="Save Event">
+							-->
+				</div>
+			<!--  alert(document.getElementsByClassName('list')[0].name + ' ' + document.getElementsByClassName('list')[0].checked);alert(document.getElementsByClassName('list')[1].name + ' ' + document.getElementsByClassName('list')[1].checked);alert(document.getElementsByClassName('list')[0].checked);a = document.getElementsByClassName('list')[0].name; alert('.value= ' + a);document.getElementById('_checkboxList').value = document.getElementsByClassName('list')[0].checked; alert(document.getElementById('_checkboxList').value); -->
+			</form>
+	</div>
+	
+	
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="/js/moment-timezone.js"></script>
+
+	<script
+		src="https://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"></script>
+	<script src="/js/caseNotes.js"></script>
+	<script
+		src="https://getbootstrap.com/docs/3.3/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="/js/menu.js"></script>
+	<script>
+	
+	
+	
+	function buildEachJSONString2() {
+		
+	
+		
+		
+		//document.getElementById('_checkboxList').value = 'testingtestingtesting';
+		//document.getElementById('_checkboxList').value = document.getElementById('7').checked;
+		//return document.getElementById('_checkboxList').value;
+		//alert("buildEachJSONString2()");
+		
+		//if (document.getElementById('_checkboxList').value == '') {
+			/*
+		
+	    	json = '{';
+	    	//i = 0;
+	    	
+	    	resList = document.getElementsByName('list');
+	    	for(var x=0; x < resList.length; x++)   // comparison should be "<" not "<="
+	    	{
+	    	    json = json + "\"" + resList[x].id + "\"=" + resList[x].checked + "\",";
+	    	}
+	    	
+	    	
+	    //	document.getElementsByName('list').forEach(function(chk){
+	    	//	  chk.addEventListener('click', function() {
+	    	 //   if(this.checked) {
+	    	//	   	json = json + "\"" + this.name + "\"=" + this.checked + "\",";
+	    		   	//i = i + 1
+	    		    //  console.log(this.value);
+	    		  //  }
+	    		//  });
+	    //		});
+	    	
+	    	json = json.substring(0, str.length - 1);  // remove the comma
+	    	json = json + '}';  */
+	    	//json = "testing from eventDetails-js";
+	    	//document.getElementById('_checkboxList').value = 'testingtestingtesting';
+	    	//jQuery("#_checkboxList").val(json);
+	    	json = "testtestingtestinsging";
+	    	document.getElementById('_checkboxList').value = json;
+	    
+	    	
+	}
+	
+	
+	</script>
+
+</body>
+</html>

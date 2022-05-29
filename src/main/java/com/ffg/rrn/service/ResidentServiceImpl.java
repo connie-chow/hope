@@ -17,12 +17,14 @@ import org.springframework.stereotype.Service;
 import com.ffg.rrn.dao.ActionPlanDAO;
 import com.ffg.rrn.dao.CaseNotesDAO;
 import com.ffg.rrn.dao.DashboardDao;
+import com.ffg.rrn.dao.EventDAO;
 import com.ffg.rrn.dao.ReferralFormDAO;
 import com.ffg.rrn.dao.ResidentDAO;
 import com.ffg.rrn.model.AssessmentQuestionnaire;
 import com.ffg.rrn.model.AssessmentType;
 import com.ffg.rrn.model.Choice;
 import com.ffg.rrn.model.Dashboard;
+import com.ffg.rrn.model.Event;
 import com.ffg.rrn.model.Property;
 import com.ffg.rrn.model.QuestionChoice;
 import com.ffg.rrn.model.Referral;
@@ -52,6 +54,9 @@ public class ResidentServiceImpl {
 
 	@Autowired
 	private DashboardDao dashboardDao;
+	
+	@Autowired
+	private EventDAO eventDao;
 
 	/**
 	 * Get all Assessment Questions as ref data to display on Page for Resident.
@@ -313,5 +318,17 @@ public class ResidentServiceImpl {
 	public List<ResidentAudit> getResidentAudits(Long residentId) {
 		return residentDao.getResidentAudits(residentId);
 	}
-
+	
+	public Long saveEvent(final Event event) {
+		return eventDao.saveEvent(event);
 	}
+	
+	public List<Event> getAllEvents() {
+		return eventDao.getAllEvents();
+	}
+	
+	public Event getEventById(long id) {
+		return eventDao.getEventById(id);
+	}
+
+}

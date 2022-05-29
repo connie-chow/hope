@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Resident Resource Network</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="/css/common.css" rel="stylesheet">
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.navbar-brand>img {
+	height: 100%;
+}
+
+.navbar-brand {
+	padding: 0;
+}
+</style>
+
+<script type="text/javascript">
+	var res = null;
+</script>
+
+</head>
+<body>
+
+	<!-- Include _menu.html -->
+	<th:block th:include="../templates/_menu"></th:block>
+
+	<div class="container">
+	
+		<div id="eventsListing">
+		<div th:unless="${eventList.empty}">
+		
+			<table>
+				<tr> <a href="/addEvent">Create New Event</a></tr>
+				<tr>
+					<th>Event Name</th><th>Details</th><th>Date</th><th>Description</th>
+				</tr>
+				<tr th:each ="event: ${eventList}">
+					<td th:text="${event.name}" />
+					<td><a th:href="@{/goToEventDetails/(id=${event.eventId})}">Event Details</a></td>
+				 	<td th:text="${event.dateAdded}"/>
+					<td th:text="${event.description}"/>
+				</tr>
+			</table>
+			 
+		</div>
+		</div>
+		<p>
+	
+	
+		<!--
+		<div id="events_Form">
+
+			<form name='_eventsF' th:action="@{/saveEvent}"
+				th:object="${event}" method='POST' class="form-horizontal">
+					
+				<p>Event Name:<input class="form-control input-sm" id="eventName"
+										th:field="*{name}" placeholder="Enter Event Name"
+										required>
+										
+ 
+			<input class="form-control" placeholder="MM/DD/YYYY (/ comes automatically, just type numbers)" id="_eventDate" th:field="*{dateAdded}" /></td>
+							
+
+					<div class="panel-heading">Description</div>
+						<div class="panel-body">
+							<textarea class="form-control" rows="5" id="_eventDesc"
+								th:field="*{description}" th:value="*{description}"></textarea>
+						</div>
+					</div>
+
+					<!-- Submit  
+					<input type="submit" id="_eventSubmit"
+							class="btn btn-primary btn-lg" value="Save Event">
+				</div>
+			
+			</form>-->
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="/js/moment.js"></script>
+	<script src="/js/moment-timezone.js"></script>
+
+	<script
+		src="https://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"></script>
+	<script src="/js/caseNotes.js"></script>
+	<script
+		src="https://getbootstrap.com/docs/3.3/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="/js/menu.js"></script>
+
+</body>
+</html>
